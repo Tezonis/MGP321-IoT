@@ -1,30 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE Project SYSTEM "Project-5.1.dtd">
 <!-- Pymakr project file for project LPWAN -->
-<!-- Saved: 2017-01-24, 15:08:08 -->
+<!-- Saved: 2017-01-31, 10:45:40 -->
 <!-- Copyright (C) 2017 0.1, 0.1 -->
 <Project version="5.1">
   <Language>en_US</Language>
-  <Hash>6348284bae16c94a5eca1ac5c870fd105c390be2</Hash>
+  <Hash>dae10aa6def6bd0d31962dd759a4b344cfdba26c</Hash>
   <ProgLanguage mixed="0">Python3</ProgLanguage>
-  <ProjectType>Python</ProjectType>
+  <ProjectType>Qt4</ProjectType>
   <Description></Description>
   <Version>0.1</Version>
   <Author>0.1</Author>
   <Email>0.1</Email>
   <Eol index="1"/>
   <Sources>
-    <Source>0.1</Source>
     <Source>boot.py</Source>
     <Source>factory_reset.py</Source>
     <Source>hard_reset.py</Source>
+    <Source>ipv6udp_packet.pcap</Source>
     <Source>main.py</Source>
   </Sources>
   <Forms/>
   <Translations/>
   <Resources/>
   <Interfaces/>
-  <Others/>
+  <Others>
+    <Other>0.1</Other>
+  </Others>
   <MainScript>0.1</MainScript>
   <Vcs>
     <VcsType>None</VcsType>
@@ -35,5 +37,9 @@
     <FiletypeAssociation pattern="*.py3" type="SOURCES"/>
     <FiletypeAssociation pattern="*.pyw" type="SOURCES"/>
     <FiletypeAssociation pattern="*.pyw3" type="SOURCES"/>
+    <FiletypeAssociation pattern="*.qm" type="TRANSLATIONS"/>
+    <FiletypeAssociation pattern="*.qrc" type="RESOURCES"/>
+    <FiletypeAssociation pattern="*.ts" type="TRANSLATIONS"/>
+    <FiletypeAssociation pattern="*.ui" type="FORMS"/>
   </FiletypeAssociations>
 </Project>
