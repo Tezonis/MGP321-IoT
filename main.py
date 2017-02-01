@@ -12,14 +12,19 @@ applicationServerB = ApplicationServer.ApplicationServer()
 
 rule1 = {
 			"IP_version": {
-				"targetValue": 0x6,
+				"targetValue": b"6",
 				"matchingOperator": "equal",
-				"compDecompFct": "sent"
+				"compDecompFct": "value-sent"
 				},
 			"IP_trafficClass": {
-				"targetValue": 0x00,
+				"targetValue": b"00",
 				"matchingOperator": "ignore",
 				"compDecompFct": "not-sent"
+				},
+			"IP_flowLabel": {
+				"targetValue": b"51f00",
+				"matchingOperator": "MSB(12)",
+				"compDecompFct": "LSB(8)"
 				}
 		}
 
@@ -28,8 +33,9 @@ compressorA.addRule(rule1)
 
 parser = Parser.Parser(endSystemA.getPacket())
 parser.parser()
-compressorA.receivePacket(parser.get_IPv6_header_fields(), parser.get_UDP_header_fields(), parser.get_CoAP_header_fields())
+compressorA.receivePacket(parser.get_header_fields())
 print("\ncompressorA context is :")
 compressorA.printContext()
 print("\ncompressorA receivedPacket is :")
 compressorA.printReceivedPacket()
+compressorA.analyzeReceivedPacket()
