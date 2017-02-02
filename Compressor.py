@@ -2,6 +2,26 @@ import ure
 import ubinascii
 
 class Compressor:
+
+    field_size = {
+            "IP_version": 4,
+            "IP_trafficClass": 8,
+            "IP_flowLabel": 20,
+            "IP_payloadLength": 16,
+            "IP_nextHeader": 8,
+            "IP_hopLimit": 8,
+            "IP_sourceAddress": 64,
+            "IP_destinationAddress": 64,
+            "UDP_sourcePort": 16,
+            "UDP_destinationPort": 16,
+            "UDP_length": 16,
+            "UDP_checksum": 16,
+            "CoAP_version": 2,
+            "CoAP_type": 2,
+            "CoAP_tokenLength": 4,
+            "CoAP_code": 8,
+            "CoAP_messageID": 16
+        }
     
     def __init__(self):
         self.context = []
@@ -41,10 +61,10 @@ class Compressor:
     				ctx_bin = bin(int(field_content["targetValue"], 16))[2:]
     				rcv_bin = bin(int(self.received_header_fields[field_name], 16))[2:]
 
-    				ctx_nbz = 20 - len(ctx_bin)
+    				ctx_nbz = self.field_size[field_name] - len(ctx_bin)
     				ctx_bin = self.zfill(ctx_bin, ctx_nbz)
 
-    				rcv_nbz = 20 - len(rcv_bin)
+    				rcv_nbz = self.field_size[field_name] - len(rcv_bin)
     				rcv_bin = self.zfill(rcv_bin, rcv_nbz)
 
     				if ctx_bin[0:msb]==rcv_bin[0:msb]:
