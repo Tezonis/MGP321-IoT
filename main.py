@@ -14,7 +14,7 @@ rule1 = {
 			"IP_version": {
 				"targetValue": b"6",
 				"matchingOperator": "equal",
-				"compDecompFct": "value-sent"
+				"compDecompFct": "not-sent"
 				},
 			"IP_trafficClass": {
 				"targetValue": b"00",
@@ -23,13 +23,33 @@ rule1 = {
 				},
 			"IP_flowLabel": {
 				"targetValue": b"51f00",
-				"matchingOperator": "MSB(12)",
+				"matchingOperator": "MSB(16)",
+				"compDecompFct": "LSB(8)"
+				}
+		}
+
+rule2 = {
+			"IP_version": {
+				"targetValue": b"6",
+				"matchingOperator": "equal",
+				"compDecompFct": "value-sent"
+				},
+			"IP_trafficClass": {
+				"targetValue": b"00",
+				"matchingOperator": "ignore",
+				"compDecompFct": "not-sent"
+				},
+			"UDP_destinationPort": {
+				"targetValue": b"1600",
+				"matchingOperator": "MSB(8)",
 				"compDecompFct": "LSB(8)"
 				}
 		}
 
 endSystemA.addRule(rule1)
 compressorA.addRule(rule1)
+endSystemA.addRule(rule2)
+compressorA.addRule(rule2)
 
 parser = Parser.Parser(endSystemA.getPacket())
 parser.parser()
@@ -39,3 +59,4 @@ compressorA.printContext()
 print("\ncompressorA receivedPacket is :")
 compressorA.printReceivedPacket()
 compressorA.analyzeReceivedPacket()
+compressorA.compressPacket()
